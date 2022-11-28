@@ -6,7 +6,7 @@
 #    By: kyamagis <kyamagis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 18:48:40 by kyamagis          #+#    #+#              #
-#    Updated: 2022/11/25 16:51:05 by kyamagis         ###   ########.fr        #
+#    Updated: 2022/11/25 22:44:53 by kyamagis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,14 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 INCLUDE = -I ./includes/
 SRCS = ./src/main.cpp\
-		./src/Zombie.cpp\
-		./src/newZombie.cpp\
-		./src/randomChump.cpp\
+		./src/Animal.cpp\
+		./src/Dog.cpp\
+		./src/Cat.cpp\
+		./src/WrongAnimal.cpp\
+		./src/WrongCat.cpp\
 
 OBJS = $(SRCS:.cpp=.o)
-NAME = ./BraiiiiiiinnnzzzZ
+NAME = ./Polymorphism
 
 all: $(NAME)
 

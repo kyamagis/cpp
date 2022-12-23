@@ -12,12 +12,11 @@
 
 #include "../includes/DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap(): name("Emperor")
 {
 	FragTrap	frag;
 	ScavTrap	scav;
 	
-	this->name = "Emperor";
 	ClapTrap::set_name("Emperor_clap_name");
 	this->set_hit_point(frag.get_hit_point());
 	this->set_energy_point(scav.get_energy_point());
@@ -25,12 +24,11 @@ DiamondTrap::DiamondTrap()
 	std::cout << "\x1b[32mDiamondTrap\033[m "<< this->name << " called Default constructor\n" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string &_name)
+DiamondTrap::DiamondTrap(const std::string &_name): name(_name)
 {
 	FragTrap	frag;
 	ScavTrap	scav;
 
-	this->name = _name;
 	ClapTrap::set_name(_name + "_clap_name");
 	this->set_hit_point(frag.get_hit_point());
 	this->set_energy_point(scav.get_energy_point());
@@ -40,21 +38,20 @@ DiamondTrap::DiamondTrap(const std::string &_name)
 
 DiamondTrap::DiamondTrap(const DiamondTrap &_diamondtrap): ClapTrap(), FragTrap(), ScavTrap()
 {
-	this->name = _diamondtrap.name;
-	ClapTrap::set_name(_diamondtrap.name + "_clap_name");
-	this->set_hit_point(_diamondtrap.get_hit_point());
-	this->set_energy_point(_diamondtrap.get_energy_point());
-	this->set_attack_damage(_diamondtrap.get_attack_damage());
+	*this = _diamondtrap;
 	std::cout  << "\x1b[32mDiamondTrap\033[m " << this->name << " called Copy constructor\n" << std::endl;
 }
 
-DiamondTrap&	DiamondTrap::operator=(DiamondTrap &_diamondtrap)
+DiamondTrap&	DiamondTrap::operator=(const DiamondTrap &_diamondtrap)
 {
-	this->name = _diamondtrap.name;
-	ClapTrap::set_name(_diamondtrap.name + "_clap_name");
-	this->set_hit_point(_diamondtrap.get_hit_point());
-	this->set_energy_point(_diamondtrap.get_energy_point());
-	this->set_attack_damage(_diamondtrap.get_attack_damage());
+	if (this != &_diamondtrap)
+	{
+		this->name = _diamondtrap.name;
+		ClapTrap::set_name(_diamondtrap.name + "_clap_name");
+		this->set_hit_point(_diamondtrap.get_hit_point());
+		this->set_energy_point(_diamondtrap.get_energy_point());
+		this->set_attack_damage(_diamondtrap.get_attack_damage());
+	}
 	std::cout << "\x1b[32mDiamondTrap\033[m " << this->name << " called assignment operator\n" << std::endl;
 	return *this;
 }

@@ -21,19 +21,19 @@ ScavTrap::ScavTrap(const std::string &_Name)
 
 ScavTrap::ScavTrap(const ScavTrap &_scavtrap): ClapTrap()
 {
-	this->set_name(_scavtrap.get_name()); 
-	this->set_hit_point(_scavtrap.get_hit_point());
-	this->set_energy_point(_scavtrap.get_energy_point());
-	this->set_attack_damage(_scavtrap.get_attack_damage());
+	*this = _scavtrap;
 	std::cout  << "\x1b[31mScavTrap\033[m " << this->get_name() << " called Copy constructor\n" << std::endl;
 }
 
-ScavTrap&	ScavTrap::operator=(ScavTrap &_scavtrap)
+ScavTrap&	ScavTrap::operator=(const ScavTrap &_scavtrap)
 {
-	this->set_name(_scavtrap.get_name()); 
-	this->set_hit_point(_scavtrap.get_hit_point());
-	this->set_energy_point(_scavtrap.get_energy_point());
-	this->set_attack_damage(_scavtrap.get_attack_damage());
+	if (this != &_scavtrap)
+	{
+		this->set_name(_scavtrap.get_name()); 
+		this->set_hit_point(_scavtrap.get_hit_point());
+		this->set_energy_point(_scavtrap.get_energy_point());
+		this->set_attack_damage(_scavtrap.get_attack_damage());
+	}
 	std::cout << "\x1b[31mScavTrap\033[m " << this->get_name() << " called assignment operator\n" << std::endl;
 	return *this;
 }

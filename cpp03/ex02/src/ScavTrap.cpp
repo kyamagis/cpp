@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kyamagis <kyamagis@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:34:34 by kyamagis          #+#    #+#             */
-/*   Updated: 2022/11/16 14:34:34 by kyamagis         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../includes/ScavTrap.hpp"
 
@@ -32,19 +21,19 @@ ScavTrap::ScavTrap(const std::string &_Name)
 
 ScavTrap::ScavTrap(const ScavTrap &_scavtrap): ClapTrap()
 {
-	this->set_name(_scavtrap.get_name()); 
-	this->set_hit_point(_scavtrap.get_hit_point());
-	this->set_energy_point(_scavtrap.get_energy_point());
-	this->set_attack_damage(_scavtrap.get_attack_damage());
+	*this = _scavtrap;
 	std::cout  << "\x1b[31mScavTrap\033[m " << this->get_name() << " called Copy constructor\n" << std::endl;
 }
 
-ScavTrap&	ScavTrap::operator=(ScavTrap &_scavtrap)
+ScavTrap&	ScavTrap::operator=(const ScavTrap &_scavtrap)
 {
-	this->set_name(_scavtrap.get_name()); 
-	this->set_hit_point(_scavtrap.get_hit_point());
-	this->set_energy_point(_scavtrap.get_energy_point());
-	this->set_attack_damage(_scavtrap.get_attack_damage());
+	if (this != &_scavtrap)
+	{
+		this->set_name(_scavtrap.get_name()); 
+		this->set_hit_point(_scavtrap.get_hit_point());
+		this->set_energy_point(_scavtrap.get_energy_point());
+		this->set_attack_damage(_scavtrap.get_attack_damage());
+	}
 	std::cout << "\x1b[31mScavTrap\033[m " << this->get_name() << " called assignment operator\n" << std::endl;
 	return *this;
 }
@@ -67,7 +56,7 @@ void	ScavTrap::attack(const std::string& target)
 		return ;
 	}
 	this->set_energy_point(get_energy_point() - 1);
-	std::cout << "\x1b[31mScavTrap\033[m " << this->get_name() <<" attacks " << target << " causing "
+	std::cout << "\x1b[31mScavTrap\033[m " <<this->get_name() <<" attacks " << target << " causing "
 				<< this->get_attack_damage() << " points of damage!\n"
 				<< std::endl;
 }

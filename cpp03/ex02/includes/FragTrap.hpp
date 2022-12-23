@@ -22,7 +22,7 @@ class	FragTrap: public ClapTrap
 		FragTrap();
 		FragTrap(const std::string &_Name);
 		FragTrap(const FragTrap &_fragtrap);
-		FragTrap&	operator=(FragTrap &_fragtrap);
+		FragTrap&	operator=(const FragTrap &_fragtrap);
 		~FragTrap();
 
 		void highFivesGuys(void);

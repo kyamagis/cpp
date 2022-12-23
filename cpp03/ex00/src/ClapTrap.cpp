@@ -12,39 +12,31 @@
 
 #include "../includes/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(): Name("Hero")
+ClapTrap::ClapTrap(): Name("Hero"), Hit_point(10), Energy_points(10), Attack_damage(0)
 {
-	this->Name = "Hero";
-	this->Hit_point = 10;
-	this->Energy_points = 10;
-	this->Attack_damage = 0;
 	std::cout << "ClapTrap " << this->Name << " called Default constructor" << std::endl;	
 }
 
-ClapTrap::ClapTrap(const std::string &_Name)
+ClapTrap::ClapTrap(const std::string &_Name): Name(_Name), Hit_point(10), Energy_points(10), Attack_damage(0)
 {
-	this->Name = _Name;
-	this->Hit_point = 10;
-	this->Energy_points = 10;
-	this->Attack_damage = 0;
 	std::cout << "ClapTrap " << this->Name << " called specific constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &_claptrap)
 {
-	this->Name = _claptrap.get_name(); 
-	this->Hit_point = _claptrap.get_hit_point();
-	this->Energy_points = _claptrap.get_energy_point();
-	this->Attack_damage = _claptrap.get_attack_damage();
+	*this = _claptrap;
 	std::cout << "ClapTrap " << this->Name << " called Copy constructor" << std::endl;
 }
 
-ClapTrap&	ClapTrap::operator=(ClapTrap &_claptrap)
+ClapTrap&	ClapTrap::operator=(const ClapTrap &_claptrap)
 {
-	this->Name = _claptrap.get_name(); 
-	this->Hit_point = _claptrap.get_hit_point();
-	this->Energy_points = _claptrap.get_energy_point();
-	this->Attack_damage = _claptrap.get_attack_damage();
+	if (this != &_claptrap)
+	{
+		this->Name = _claptrap.get_name(); 
+		this->Hit_point = _claptrap.get_hit_point();
+		this->Energy_points = _claptrap.get_energy_point();
+		this->Attack_damage = _claptrap.get_attack_damage();
+	}
 	std::cout << "ClapTrap " << this->Name << " called assignment operator" << std::endl;
 	return *this;
 }

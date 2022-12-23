@@ -23,8 +23,8 @@ class	Fixed
 	
 	public :
 		Fixed();
-		Fixed(Fixed &_fixed);
-		Fixed&	operator=(Fixed &_fixed);
+		Fixed(const Fixed &_fixed);
+		Fixed&	operator=(const Fixed &_fixed);
 		~Fixed();
 
 		int		getRawBits( void ) const;

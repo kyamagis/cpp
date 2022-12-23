@@ -35,7 +35,5 @@ bool	bsp( Point const a, Point const b, Point const c, Point const point)
 	abp = cross_product(a, b, point);
 	bcp = cross_product(b, c, point);
 	cap = cross_product(c, a, point);
-	if ((0 < abp && 0 < bcp && 0 < cap) || (abp < 0 && bcp < 0 && cap < 0))
-		return true;
-	return false;
+	return ((0 < abp && 0 < bcp && 0 < cap) || (abp < 0 && bcp < 0 && cap < 0));
 }

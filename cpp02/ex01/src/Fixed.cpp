@@ -12,41 +12,40 @@
 
 #include "../includes/Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed(): fixed_point_num()
 {
-	std::cout << "Default constructor called\n";
-	this->fixed_point_num = 0;
-}
-
-Fixed::Fixed(const int _int_num)
-{
-	std::cout << "Int constructor called\n";
-	this->fixed_point_num = _int_num << this->fractional_bits;
-}
-
-Fixed::Fixed(const float _float_num)
-{
-	std::cout << "Float constructor called\n";
-	this->fixed_point_num = roundf(_float_num * (1 << this->fractional_bits));
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &_fixed)
 {
-	std::cout << "Copy constructor called\n";
-	this->fixed_point_num = _fixed.getRawBits();
+	std::cout << "Copy constructor called" << std::endl;
+	*this = _fixed;
 }
 
 Fixed&	Fixed::operator=(const Fixed &_fixed)
 {
-	std::cout << "Copy assignment operator called\n";
-	this->fixed_point_num = _fixed.getRawBits();
-	//*this = _fixed;
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &_fixed)
+	{
+		this->fixed_point_num = _fixed.getRawBits();
+	}
 	return *this;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called\n";
+	std::cout << "Destructor called" << std::endl;
+}
+
+Fixed::Fixed(const int _int_num): fixed_point_num(_int_num * (1 << this->fractional_bits))
+{
+	std::cout << "Int constructor called"  << std::endl;
+}
+
+Fixed::Fixed(const float _float_num): fixed_point_num(roundf(_float_num * (1 << this->fractional_bits)))
+{
+	std::cout << "Float constructor called" << std::endl;
 }
 
 int		Fixed::getRawBits( void ) const
@@ -66,7 +65,7 @@ float	Fixed::toFloat( void ) const
 
 int		Fixed::toInt( void ) const
 {
-	return this->fixed_point_num >> this->fractional_bits;
+	return this->fixed_point_num / (1 << this->fractional_bits);
 }
 
 std::ostream& operator<<(std::ostream &ostrm, Fixed const &_fixed)

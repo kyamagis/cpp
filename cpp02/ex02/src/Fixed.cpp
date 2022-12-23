@@ -12,37 +12,27 @@
 
 #include "../includes/Fixed.hpp"
 
-Fixed::Fixed()
-{
-	this->fixed_point_num = 0;
-}
-
-Fixed::Fixed(const int _int_num)
-{
-	this->fixed_point_num = _int_num << this->fractional_bits;
-}
-
-Fixed::Fixed(const float _float_num)
-{
-	this->fixed_point_num = roundf(_float_num * (1 << this->fractional_bits));
-}
+Fixed::Fixed(): fixed_point_num(){}
 
 Fixed::Fixed(const Fixed &_fixed)
 {
-	this->fixed_point_num = _fixed.getRawBits();
+	*this = _fixed;
 }
 
 Fixed&	Fixed::operator=(const Fixed &_fixed)
 {
-	this->fixed_point_num = _fixed.getRawBits();
-	//*this = _fixed;
+	if (this != &_fixed)
+	{
+		this->fixed_point_num = _fixed.getRawBits();
+	}
 	return *this;
 }
 
-Fixed::~Fixed()
-{
-	
-}
+Fixed::~Fixed(){}
+
+Fixed::Fixed(const int _int_num): fixed_point_num(_int_num * (1 << this->fractional_bits)){}
+
+Fixed::Fixed(const float _float_num): fixed_point_num(roundf(_float_num * (1 << this->fractional_bits))){}
 
 int		Fixed::getRawBits( void ) const
 {
@@ -61,7 +51,7 @@ float	Fixed::toFloat( void ) const
 
 int		Fixed::toInt( void ) const
 {
-	return this->fixed_point_num >> this->fractional_bits;
+	return this->fixed_point_num / (1 << this->fractional_bits);
 }
 
 std::ostream& operator<<(std::ostream &ostrm, Fixed const &_fixed)
@@ -101,22 +91,22 @@ bool	Fixed::operator!=(const Fixed &_fixed)
 
 float	Fixed::operator+(const Fixed &_fixed)
 {
-	return this->toFloat() + _fixed.toFloat();
+	return (float)(this->getRawBits() + _fixed.getRawBits()) / (1 << this->fractional_bits);
 }
 
 float	Fixed::operator-(const Fixed &_fixed)
 {
-	return this->toFloat() - _fixed.toFloat();
+	return (float)(this->getRawBits() - _fixed.getRawBits()) / (1 << this->fractional_bits);
 }
 
 float	Fixed::operator*(const Fixed &_fixed)
 {
-	return this->toFloat() * _fixed.toFloat();
+	return (float)(this->getRawBits() * _fixed.getRawBits()) / ((1 << this->fractional_bits) * (1 << this->fractional_bits));
 }
 
 float	Fixed::operator/(const Fixed &_fixed)
 {
-	return this->toFloat() / _fixed.toFloat();
+	return (float)this->fixed_point_num / (float)_fixed.fixed_point_num;
 }
 
 Fixed&	Fixed::operator++()

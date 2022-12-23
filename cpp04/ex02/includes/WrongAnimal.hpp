@@ -22,9 +22,9 @@ class	WrongAnimal
 
 	public :
 		WrongAnimal();
-		WrongAnimal(std::string &_type);
-		WrongAnimal(WrongAnimal &_WrongAnimal);
-		WrongAnimal&	operator=(WrongAnimal &_WrongAnimal);
+		WrongAnimal(const std::string &_type);
+		WrongAnimal(const WrongAnimal &_WrongAnimal);
+		WrongAnimal&	operator=(const WrongAnimal &_WrongAnimal);
 		~WrongAnimal();
 
 		void makeSound()const;

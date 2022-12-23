@@ -23,9 +23,9 @@ class	Animal
 
 	public :
 		Animal();
-		Animal(std::string &_type);
-		Animal(Animal &_Animal);
-		Animal&	operator=(Animal &_Animal);
+		Animal(const std::string &_type);
+		Animal(const Animal &_Animal);
+		Animal&	operator=(const Animal &_Animal);
 		virtual ~Animal();
 
 		virtual void makeSound()const = 0;

@@ -12,9 +12,9 @@ class	Brain
 
 	public :
 		Brain();
-		Brain(std::string &_type);
-		Brain(Brain &_Brain);
-		Brain&	operator=(Brain &_Brain);
+		Brain(const std::string &_type);
+		Brain(const Brain &_Brain);
+		Brain&	operator=(const Brain &_Brain);
 		virtual ~Brain();
 	
 		void		set_idea(const int i, const std::string &_ideas);

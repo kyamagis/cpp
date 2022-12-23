@@ -8,18 +8,20 @@ Brain::Brain()
 		this->ideas[i] = "No have idea";
 }
 
-Brain::Brain(Brain &_Brain)
+Brain::Brain(const Brain &_Brain)
 {
 	std::cout << "\x1b[32mBrain Copy constructor called\033[m\n" << std::endl;
-	for (int i = 0; i < 100 ; i++)
-		this->ideas[i] = _Brain.ideas[i];
+	*this = _Brain;
 }
 
-Brain&	Brain::operator=(Brain &_Brain)
+Brain&	Brain::operator=(const Brain &_Brain)
 {
 	std::cout << "\x1b[32mBrain Copy assignment operator called\033[m\n" << std::endl;
-	for (int i = 0; i < 100 ; i++)
-		this->ideas[i] = _Brain.ideas[i];
+	if (this != &_Brain)
+	{
+		for (int i = 0; i < 100 ; i++)
+			this->ideas[i] = _Brain.ideas[i];
+	}
 	return *this;
 }
 
@@ -42,7 +44,7 @@ std::string Brain::get_idea(const int i)const
 	return this->ideas[i];
 }
 
-void		Brain::ideasdup(const Brain &_brain)
+void	Brain::ideasdup(const Brain &_brain)
 {
 	for (int i = 0; i < 100; i++)
 		this->ideas[i] = _brain.ideas[i];

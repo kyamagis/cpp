@@ -12,42 +12,26 @@
 
 #include "../includes/AMateria.hpp"
 
-AMateria::AMateria(): _type("No type")
-{
+AMateria::AMateria(): _type("No type"){}
 
-}
+AMateria::AMateria(const AMateria &type): _type(type._type){}
 
+AMateria::AMateria(std::string const & type): _type(type){}
 
-AMateria::AMateria(const AMateria &type): _type(type._type)
-{
-
-}
-
-AMateria::AMateria(std::string const & type): _type(type)
-{
-	
-}
-
-AMateria:: ~AMateria()
-{
-
-}
+AMateria:: ~AMateria(){}
 
 AMateria&	AMateria::operator=(const AMateria &a)
 {
-	(void)a;
+	if (this != &a)
+	{
+		this->_type = a._type;
+	}
 	return *this;
 }
 
-std::string const & AMateria::getType() const
-{
-	return this->_type;
-}
+std::string const & AMateria::getType() const{ return this->_type;}
 
-AMateria* AMateria::clone() const
-{
-	return NULL;
-}
+AMateria* AMateria::clone() const{ return NULL;}
 
 void	AMateria::use(ICharacter& target)
 {

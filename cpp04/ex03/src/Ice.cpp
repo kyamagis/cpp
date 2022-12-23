@@ -12,15 +12,9 @@
 
 #include "../includes/Ice.hpp"
 
-Ice::Ice(): AMateria("ice")
-{
-	
-}
+Ice::Ice(): AMateria("ice"){}
 
-Ice::Ice(const Ice &ice): AMateria(ice.getType())
-{
-	
-}
+Ice::Ice(const Ice &ice): AMateria(ice.getType()){}
 
 Ice&	Ice::operator=(const Ice &ice)
 {
@@ -28,26 +22,9 @@ Ice&	Ice::operator=(const Ice &ice)
 	return *this;
 }
 
-Ice::~Ice()
-{
-	
-}
+Ice::~Ice(){}
 
-Ice*	Ice::clone() const
-{
-	Ice	*ice;
-
-	try
-	{
-		ice = new Ice;
-	}
-	catch(const std::bad_alloc& b)
-	{
-		std::cerr << b.what() << std::endl;
-		std::exit(EXIT_FAILURE);
-	}
-	return ice;
-}
+Ice*	Ice::clone() const{ return new Ice();}
 
 void	Ice::use(ICharacter& target)
 {

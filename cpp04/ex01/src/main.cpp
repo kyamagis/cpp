@@ -18,82 +18,66 @@
 
 int main()
 {
+	try
 	{
-		const Animal* j = new Dog();
-		const Animal* i = new Cat();
-
-		delete j;
-		delete i;
-	}
-	std::cout << "------------------------------" << std::endl;
-	{	
-		const Animal	*k[10];
-
-		try
 		{
+			const Animal* j = new Dog();
+			const Animal* i = new Cat();
+
+			delete j;
+			delete i;
+		}
+		std::cout << "------------------------------" << std::endl;
+		{	
+			const Animal	*k[10];
+
 			for(int i = 0; i < 5; i++)
 				k[i] = new Dog();
 			for(int i = 5; i < 10; i++)
 				k[i] = new Cat();
+			for(int i = 0; i < 10; i++)
+				delete k[i];
 		}
-		catch(const std::bad_alloc &b)
-		{
-			std::cerr << b.what() << std::endl;
-			std::exit(EXIT_FAILURE);
-		}
-		for(int i = 0; i < 10; i++)
-			delete k[i];
-	}
-	std::cout << "------------------------------" << std::endl;
-	{	
-		Dog* dog1;
+		std::cout << "------------------------------" << std::endl;
+		{	
+			Dog* dog1;
 
-		try
-		{
 			dog1 = new Dog();
-		}
-		catch(const std::bad_alloc &b)
-		{
-			std::cerr << b.what() << std::endl;
-			std::exit(EXIT_FAILURE);
-		}
+			Dog dog2(*dog1);
+			Dog dog3;
 
-		Dog dog2(*dog1);
-		Dog dog3;
-
-		dog3 = *dog1;
-		delete dog1;
-		std::cout << dog2.getIdea(0) << std::endl;
-		std::cout << dog3.getIdea(0) << std::endl << std::endl;
-		
-	}
-	std::cout << "------------------------------" << std::endl;
-	{
-		Cat* cat1;
-		try
+			dog3 = *dog1;
+			delete dog1;
+			std::cout << dog2.getIdea(0) << std::endl;
+			std::cout << dog3.getIdea(0) << std::endl << std::endl;
+			
+		}
+		std::cout << "------------------------------" << std::endl;
 		{
+			Cat* cat1;
+
 			cat1 = new Cat();
+
+			Cat cat2 = *cat1;
+			Cat cat3;
+
+			cat3 = *cat1;
+			delete cat1;
+			std::cout << cat2.getIdea(0) << std::endl;
+			std::cout << cat3.getIdea(0) << std::endl << std::endl;
 		}
-		catch(const std::bad_alloc &b)
+		std::cout << "------------------------------" << std::endl;
 		{
-			std::cerr << b.what() << std::endl;
-			std::exit(EXIT_FAILURE);
+			Dog basic;
+			{
+				Dog tmp = basic;
+			}
 		}
-
-		Cat cat2 = *cat1;
-		Cat cat3;
-
-		cat3 = *cat1;
-		delete cat1;
-		std::cout << cat2.getIdea(0) << std::endl;
-		std::cout << cat3.getIdea(0) << std::endl << std::endl;
 	}
-	std::cout << "------------------------------" << std::endl;
+	catch (const std::bad_alloc &e)
 	{
-		Dog basic;
-		{
-			Dog tmp = basic;
-		}
+		std::cerr << e.what() << std::endl;
+		std::exit(EXIT_FAILURE);
 	}
 	return 0;
 }

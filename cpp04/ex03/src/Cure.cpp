@@ -12,15 +12,9 @@
 
 #include "../includes/Cure.hpp"
 
-Cure::Cure(): AMateria("cure")
-{
-	
-}
+Cure::Cure(): AMateria("cure"){}
 
-Cure::Cure(const Cure &cure): AMateria(cure.getType())
-{
-	
-}
+Cure::Cure(const Cure &cure): AMateria(cure.getType()){}
 
 Cure&	Cure::operator=(const Cure &cure)
 {
@@ -28,26 +22,9 @@ Cure&	Cure::operator=(const Cure &cure)
 	return *this;
 }
 
-Cure::~Cure()
-{
-	
-}
+Cure::~Cure(){}
 
-Cure*	Cure::clone() const
-{
-	Cure	*cure;
-
-	try
-	{
-		cure = new Cure;
-	}
-	catch(const std::bad_alloc& b)
-	{
-		std::cerr << b.what() << std::endl;
-		std::exit(EXIT_FAILURE);
-	}
-	return cure;
-}
+Cure*	Cure::clone() const{return new Cure();}
 
 void	Cure::use(ICharacter& target)
 {

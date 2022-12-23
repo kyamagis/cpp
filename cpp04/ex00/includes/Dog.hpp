@@ -8,9 +8,9 @@ class	Dog: public Animal
 {
 	public :
 		Dog();
-		Dog(std::string &_type);
-        Dog(Dog &_Dog);
-		Dog&	operator=(Dog &_Dog);
+		Dog(const std::string &_type);
+        Dog(const Dog &_Dog);
+		Dog&	operator=(const Dog &_Dog);
 		virtual ~Dog();
 
         virtual void makeSound()const;

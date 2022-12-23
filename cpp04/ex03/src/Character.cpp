@@ -27,13 +27,7 @@ Character::Character(const std::string	&_name): name(_name)
 
 Character::Character(const Character &_character): name(_character.name)
 {
-	for (int i = 0; i < 4; i++)
-	{	
-		if (this->inventory[i])
-			delete this->inventory[i];
-		if (_character.inventory[i])
-			this->inventory[i] = _character.inventory[i]->clone();
-	}
+	*this = _character;
 }
 
 Character::~Character()
@@ -44,12 +38,15 @@ Character::~Character()
 
 Character&	Character::operator=(const Character &_character)
 {
-	for (int i = 0; i < 4; i++)
-	{	
-		if (this->inventory[i])
-			delete this->inventory[i];
-		if (_character.inventory[i])
-			this->inventory[i] = _character.inventory[i]->clone();
+	if (this != &_character)
+	{
+		for (int i = 0; i < 4; i++)
+		{	
+			if (this->inventory[i])
+				delete this->inventory[i];
+			if (_character.inventory[i])
+				this->inventory[i] = _character.inventory[i]->clone();
+		}
 	}
 	return *this;
 }

@@ -24,7 +24,7 @@ Span::Span(const unsigned int &N): _size(N)
 
 Span::Span(const Span &_span): _size(_span._size)
 {
-	this->stack = _span.stack;
+	*this = _span;
 }
 
 Span&	Span::operator=(const Span &_span)

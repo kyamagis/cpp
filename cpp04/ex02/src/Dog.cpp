@@ -1,73 +1,39 @@
 
 #include "../includes/Dog.hpp"
 
-Dog::Dog()
+Dog::Dog(): Animal("Dog"), dog_brain(new Brain())
 {
-	std::cout << "\x1b[34mDog Default constructor called\033[m\n";
-	this->type = "Dog";
-	try
-	{	
-		this->dog_brain = new Brain;
-	}
-	catch (std::bad_alloc &e)
-	{
-		std::cerr << e.what() << "\n";
-		std::exit(EXIT_FAILURE);
-	}
+	std::cout << "\x1b[34mDog Default constructor called\033[m" << std::endl;
 }
 
-Dog::Dog(std::string &_type)
+Dog::Dog(const std::string &_type): Animal(_type), dog_brain(new Brain())
 {
-	this->type = _type;
-	std::cout << "\x1b[34mDog constructor called\033[m\n";
-	try
-	{	
-		this->dog_brain = new Brain();
-	}
-	catch (std::bad_alloc &e)
-	{
-		std::cerr << e.what() << "\n";
-		std::exit(EXIT_FAILURE);
-	}
+	std::cout << "\x1b[34mDog constructor called\033[m" << std::endl;
 }
 
-Dog::Dog(Dog &_dog): Animal(_dog.type)
+Dog::Dog(const Dog &_dog): Animal(_dog.type), dog_brain(new Brain())
 {
-	std::cout << "\x1b[34mDog Copy constructor called\033[m\n";
-	try
-	{	
-		this->dog_brain = new Brain();
-	}
-	catch (std::bad_alloc &e)
-	{
-		std::cerr << e.what() << "\n";
-		std::exit(EXIT_FAILURE);
-	}
+	std::cout << "\x1b[34mDog Copy constructor called\033[m" << std::endl;
 	this->dog_brain->ideasdup(*_dog.dog_brain);
 }
 
-Dog&	Dog::operator=(Dog &_dog)
+Dog&	Dog::operator=(const Dog &_dog)
 {
-	std::cout << "\x1b[34mDog Copy assignment operator called\033[m\n";
+	std::cout << "\x1b[34mDog Copy assignment operator called\033[m" << std::endl;
 	this->type = _dog.type;
-	if (this->dog_brain)
-		delete this->dog_brain;
-	try
-	{	
-		this->dog_brain = new Brain();
-	}
-	catch (std::bad_alloc &e)
+	if (this != &_dog)
 	{
-		std::cerr << e.what() << "\n";
-		std::exit(EXIT_FAILURE);
+		if (this->dog_brain)
+			delete this->dog_brain;
+		this->dog_brain = new Brain();
+		this->dog_brain->ideasdup(*_dog.dog_brain);
 	}
-	this->dog_brain->ideasdup(*_dog.dog_brain);
 	return *this;
 }
 
 Dog::~Dog()
 {
-	std::cout << "\x1b[34mDog Destructor called\033[m\n";
+	std::cout << "\x1b[34mDog Destructor called\033[m" << std::endl;
 	if (this->dog_brain)
 		delete this->dog_brain;
 }

@@ -52,6 +52,6 @@ class	Bureaucrat
 		};
 };
 
-std::ostream &operator<<(std::ostream &ostrm, const Bureaucrat &_bureaucrat);
+std::ostream &operator<<(std::ostream &ostrm, const Bureaucrat &bureaucrat);
 
 #endif

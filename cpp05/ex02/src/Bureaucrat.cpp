@@ -93,6 +93,11 @@ const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
 	return "Too low Grade";
 }
 
+const char	*Bureaucrat::GradeTooLowThanExeGradeException::what(void) const throw()
+{
+	return "Grade is lower than execution grade";
+}
+
 std::ostream &operator<<(std::ostream &ostrm, const Bureaucrat &bureaucrat)
 {
 	return ostrm << bureaucrat.getName() << ", bureaucrat grade " 

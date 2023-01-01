@@ -24,11 +24,11 @@ class	Form;
 class	Intern
 {
 	private:
-		Intern(const Intern &_intern);
+		Intern(const Intern &intern);
 
 	public :
 		Intern();
-		Intern&	operator=(Intern &_intern);
+		Intern&	operator=(Intern &intern);
 		~Intern();
 
 		Form	*makeForm(const std::string &form_name, const std::string &form_target);

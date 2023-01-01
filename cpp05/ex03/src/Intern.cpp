@@ -12,26 +12,20 @@
 
 #include "../includes/Intern.hpp"
 
-Intern::Intern()
-{
+Intern::Intern(){}
 
+Intern::Intern(const Intern &intern)
+{
+	(void)intern;
 }
 
-Intern::Intern(const Intern &_intern)
+Intern&	Intern::operator=(Intern &intern)
 {
-	(void)_intern;
-}
-
-Intern&	Intern::operator=(Intern &_intern)
-{
-	(void)_intern;
+	(void)intern;
 	return *this;
 }
 
-Intern::~Intern()
-{
-	
-}
+Intern::~Intern(){}
 
 Form	*Intern::allocatePresidentForm(const std::string &form_target)
 {
@@ -41,7 +35,7 @@ Form	*Intern::allocatePresidentForm(const std::string &form_target)
 	{	
 		form = new PresidentialPardonForm(form_target);
 	}
-	catch (std::bad_alloc &e)
+	catch (const std::bad_alloc &e)
 	{
 		std::cerr << e.what() << std::endl;
 		std::exit(EXIT_FAILURE);
@@ -58,7 +52,7 @@ Form	*Intern::allocateRobotomyForm(const std::string &form_target)
 	{
 		form = new RobotomyRequestForm(form_target);
 	}
-	catch (std::bad_alloc &e)
+	catch (const std::bad_alloc &e)
 	{
 		std::cerr << e.what() << std::endl;
 		std::exit(EXIT_FAILURE);
@@ -75,7 +69,7 @@ Form	*Intern::allocateShrubberyForm(const std::string &form_target)
 	{
 		form = new ShrubberyCreationForm(form_target);
 	}
-	catch (std::bad_alloc &e)
+	catch (const std::bad_alloc &e)
 	{
 		std::cerr << e.what() << std::endl;
 		std::exit(EXIT_FAILURE);

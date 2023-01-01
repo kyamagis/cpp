@@ -13,44 +13,33 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(): \
-	Form("ShrubberyCreationForm", 145, 137), target("nemo")
+	Form("ShrubberyCreationForm", 145, 137), _target("nemo"){}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target): \
+	Form("ShrubberyCreationForm", 145, 137), _target(target){}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &shrubberyCreationForm): \
+	Form("ShrubberyCreationForm", 145, 137), _target(shrubberyCreationForm._target){}
+
+ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationForm &shrubberyCreationForm)
 {
-	
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &_target): \
-	Form("ShrubberyCreationForm", 145, 137), target(_target)
-{
-
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &_shrubberyCreationForm): \
-	Form("ShrubberyCreationForm", 145, 137), target(_shrubberyCreationForm.target)
-{
-
-}
-
-ShrubberyCreationForm&	ShrubberyCreationForm::operator=(ShrubberyCreationForm &_shrubberyCreationForm)
-{
-	this->target = _shrubberyCreationForm.target;
+	if (this != &shrubberyCreationForm)
+		this->_target = shrubberyCreationForm._target;
 	return *this;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-	
-}
+ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (this->isSigngradeHighterThanGarade(executor) == false)
 		return ;
 	std::ofstream	ofs;
-	std::string file = this->target + "_shrubbery";
+	std::string file = this->_target + "_shrubbery";
 	ofs.open(file.c_str());
 	if (!ofs)
 	{	
-		std::cout << "Failed to open outfile" << "\n";
+		std::cout << "Failed to open outfile" << std::endl;
 		return ;
 	}
 

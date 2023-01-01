@@ -56,6 +56,12 @@ class	Bureaucrat
 				virtual const char *what() const throw();
 		};
 
+		class	GradeTooLowThanExeGradeException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
+
 		void	executeForm(Form const & form);
 };
 

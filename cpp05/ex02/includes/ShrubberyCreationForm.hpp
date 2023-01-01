@@ -22,13 +22,13 @@
 class	ShrubberyCreationForm: public Form
 {
 	private:
-		std::string	target;
+		std::string	_target;
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(const ShrubberyCreationForm &_shrubberyCreationForm);
+		ShrubberyCreationForm(const ShrubberyCreationForm &shrubberyCreationForm);
 	
 	public :
-		ShrubberyCreationForm(const std::string &_target);
-		ShrubberyCreationForm&	operator=(ShrubberyCreationForm &_shrubberyCreationForm);
+		ShrubberyCreationForm(const std::string &target);
+		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm &shrubberyCreationForm);
 		virtual ~ShrubberyCreationForm();
 
 		void	execute(Bureaucrat const & executor) const;

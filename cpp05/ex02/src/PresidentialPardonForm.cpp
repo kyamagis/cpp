@@ -13,38 +13,27 @@
 #include "../includes/PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(): \
-	Form("PresidentialPardonForm", 25, 5), target("nemo")
+	Form("PresidentialPardonForm", 25, 5), _target("nemo"){}
+
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target): \
+	Form("PresidentialPardonForm", 25, 5), _target(target){}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &presidentialPardonForm): \
+	Form("PresidentialPardonForm", 25, 5), _target(presidentialPardonForm._target){}
+
+PresidentialPardonForm&	PresidentialPardonForm::operator=(const PresidentialPardonForm &presidentialPardonForm)
 {
-	
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const std::string &_target): \
-	Form("PresidentialPardonForm", 25, 5), target(_target)
-{
-
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &_presidentialPardonForm): \
-	Form("PresidentialPardonForm", 25, 5), target(_presidentialPardonForm.target)
-{
-
-}
-
-PresidentialPardonForm&	PresidentialPardonForm::operator=(PresidentialPardonForm &_presidentialPardonForm)
-{
-	this->target = _presidentialPardonForm.target;
+	if (this != &presidentialPardonForm)
+		this->_target = presidentialPardonForm._target;
 	return *this;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-	
-}
+PresidentialPardonForm::~PresidentialPardonForm(){}
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	if (this->isSigngradeHighterThanGarade(executor) == false)
 		return ;
-	std::cout << this->target<< " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	std::cout << this->_target<< " has been pardoned by Zaphod Beeblebrox" << std::endl;
 	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }

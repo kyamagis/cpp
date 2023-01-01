@@ -12,71 +12,60 @@
 
 #include "../includes/Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(): name("nemo")
+Bureaucrat::Bureaucrat(): _name("nemo"), _grade(150){}
+
+Bureaucrat::Bureaucrat(const std::string &name): _name(name), _grade(150){}
+
+Bureaucrat::Bureaucrat(const std::string &name, const int grade): _name(name), _grade(grade){}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat): _name(bureaucrat._name)
 {
-	this->grade = 150;
+	*this = bureaucrat;
 }
 
-Bureaucrat::Bureaucrat(const std::string &_name): name(_name)
+Bureaucrat&	Bureaucrat::operator=(const Bureaucrat &bureaucrat)
 {
-	this->grade = 150;
-}
-
-Bureaucrat::Bureaucrat(const std::string &_name, const int grade): name(_name)
-{
-	this->setGrade(grade);
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat &_bureaucrat):name(_bureaucrat.name)
-{
-	this->setGrade(_bureaucrat.grade);
-}
-
-Bureaucrat&	Bureaucrat::operator=(Bureaucrat &_bureaucrat)
-{
-	this->setGrade(_bureaucrat.grade);
+	if (this != &bureaucrat)
+		this->setGrade(bureaucrat._grade);
 	return *this;
 }
 
-Bureaucrat::~Bureaucrat()
-{
-	
-}
+Bureaucrat::~Bureaucrat(){}
 
 std::string	Bureaucrat::getName() const
 {
-	return this->name;
+	return this->_name;
 }
 
 int	Bureaucrat::getGrade() const
 {
-	return this->grade;
+	return this->_grade;
 }
 
-void	Bureaucrat::setGrade(const int &_grade)
+void	Bureaucrat::setGrade(const int &grade)
 {
-	if (_grade < 1)
+	if (grade < 1)
 	{
-		this->grade = 1;
+		this->_grade = 1;
 		throw Bureaucrat::GradeTooHighException();
 	}
-	else if (150 < _grade)
+	else if (150 < grade)
 	{
-		this->grade = 150;
+		this->_grade = 150;
 		throw Bureaucrat::GradeTooLowException();
 	}
 	else
-		this->grade = _grade;
+		this->_grade = grade;
 }
 
 void	Bureaucrat::incrementGrade()
 {
-	this->setGrade(this->grade - 1);
+	this->setGrade(this->_grade - 1);
 }
 
 void	Bureaucrat::decrementGrade()
 {
-	this->setGrade(this->grade + 1);
+	this->setGrade(this->_grade + 1);
 }
 
 // Bureaucrat&	Bureaucrat::operator++()
@@ -101,8 +90,8 @@ const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
 	return "Too low Grade";
 }
 
-std::ostream &operator<<(std::ostream &ostrm, const Bureaucrat &_bureaucrat)
+std::ostream &operator<<(std::ostream &ostrm, const Bureaucrat &bureaucrat)
 {
-	return ostrm << _bureaucrat.getName() << ", bureaucrat grade " 
-					<< _bureaucrat.getGrade() << "."<< std::endl;
+	return ostrm << bureaucrat.getName() << ", bureaucrat grade " 
+					<< bureaucrat.getGrade() << "."<< std::endl;
 }
